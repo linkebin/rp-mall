@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Table(name = "sys_message")
 public class SysMessage {
+    @Id
     @Column(name = "ID_")
     private String id;
 

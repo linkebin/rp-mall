@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class NoticeAdministrationController {
     private NoticeAdministrationService noticeAdministrationService;
 
     @PostMapping
-    public Result add(@RequestBody NoticeAdministration noticeAdministration) {
+    public Result add(NoticeAdministration noticeAdministration) {
+        noticeAdministration.setId(UUID.randomUUID().toString());
         noticeAdministrationService.save(noticeAdministration);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         noticeAdministrationService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody NoticeAdministration noticeAdministration) {
+    public Result update(NoticeAdministration noticeAdministration) {
         noticeAdministrationService.update(noticeAdministration);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         NoticeAdministration noticeAdministration = noticeAdministrationService.findById(id);
         return ResultGenerator.genSuccessResult(noticeAdministration);
     }
@@ -49,6 +51,6 @@ public class NoticeAdministrationController {
         PageHelper.startPage(page, size);
         List<NoticeAdministration> list = noticeAdministrationService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

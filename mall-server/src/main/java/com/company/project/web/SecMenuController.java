@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class SecMenuController {
     private SecMenuService secMenuService;
 
     @PostMapping
-    public Result add(@RequestBody SecMenu secMenu) {
+    public Result add(SecMenu secMenu) {
+        secMenu.setId(UUID.randomUUID().toString());
         secMenuService.save(secMenu);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         secMenuService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody SecMenu secMenu) {
+    public Result update(SecMenu secMenu) {
         secMenuService.update(secMenu);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         SecMenu secMenu = secMenuService.findById(id);
         return ResultGenerator.genSuccessResult(secMenu);
     }
@@ -49,6 +51,6 @@ public class SecMenuController {
         PageHelper.startPage(page, size);
         List<SecMenu> list = secMenuService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

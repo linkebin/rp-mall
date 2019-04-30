@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class AgencyAccountController {
     private AgencyAccountService agencyAccountService;
 
     @PostMapping
-    public Result add(@RequestBody AgencyAccount agencyAccount) {
+    public Result add(AgencyAccount agencyAccount) {
+        agencyAccount.setId(UUID.randomUUID().toString());
         agencyAccountService.save(agencyAccount);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         agencyAccountService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody AgencyAccount agencyAccount) {
+    public Result update(AgencyAccount agencyAccount) {
         agencyAccountService.update(agencyAccount);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         AgencyAccount agencyAccount = agencyAccountService.findById(id);
         return ResultGenerator.genSuccessResult(agencyAccount);
     }
@@ -49,6 +51,6 @@ public class AgencyAccountController {
         PageHelper.startPage(page, size);
         List<AgencyAccount> list = agencyAccountService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

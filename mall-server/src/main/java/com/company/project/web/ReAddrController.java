@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class ReAddrController {
     private ReAddrService reAddrService;
 
     @PostMapping
-    public Result add(@RequestBody ReAddr reAddr) {
+    public Result add(ReAddr reAddr) {
+        reAddr.setId(UUID.randomUUID().toString());
         reAddrService.save(reAddr);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         reAddrService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody ReAddr reAddr) {
+    public Result update(ReAddr reAddr) {
         reAddrService.update(reAddr);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         ReAddr reAddr = reAddrService.findById(id);
         return ResultGenerator.genSuccessResult(reAddr);
     }
@@ -49,6 +51,6 @@ public class ReAddrController {
         PageHelper.startPage(page, size);
         List<ReAddr> list = reAddrService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

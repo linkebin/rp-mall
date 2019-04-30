@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class BehaviorLogController {
     private BehaviorLogService behaviorLogService;
 
     @PostMapping
-    public Result add(@RequestBody BehaviorLog behaviorLog) {
+    public Result add(BehaviorLog behaviorLog) {
+        behaviorLog.setId(UUID.randomUUID().toString());
         behaviorLogService.save(behaviorLog);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         behaviorLogService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody BehaviorLog behaviorLog) {
+    public Result update(BehaviorLog behaviorLog) {
         behaviorLogService.update(behaviorLog);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         BehaviorLog behaviorLog = behaviorLogService.findById(id);
         return ResultGenerator.genSuccessResult(behaviorLog);
     }
@@ -49,6 +51,6 @@ public class BehaviorLogController {
         PageHelper.startPage(page, size);
         List<BehaviorLog> list = behaviorLogService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

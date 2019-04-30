@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class GoodsSkuController {
     private GoodsSkuService goodsSkuService;
 
     @PostMapping
-    public Result add(@RequestBody GoodsSku goodsSku) {
+    public Result add(GoodsSku goodsSku) {
+        goodsSku.setId(UUID.randomUUID().toString());
         goodsSkuService.save(goodsSku);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         goodsSkuService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody GoodsSku goodsSku) {
+    public Result update(GoodsSku goodsSku) {
         goodsSkuService.update(goodsSku);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         GoodsSku goodsSku = goodsSkuService.findById(id);
         return ResultGenerator.genSuccessResult(goodsSku);
     }
@@ -49,6 +51,6 @@ public class GoodsSkuController {
         PageHelper.startPage(page, size);
         List<GoodsSku> list = goodsSkuService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

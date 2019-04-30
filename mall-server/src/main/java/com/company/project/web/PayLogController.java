@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class PayLogController {
     private PayLogService payLogService;
 
     @PostMapping
-    public Result add(@RequestBody PayLog payLog) {
+    public Result add(PayLog payLog) {
+        payLog.setId(UUID.randomUUID().toString());
         payLogService.save(payLog);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         payLogService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody PayLog payLog) {
+    public Result update(PayLog payLog) {
         payLogService.update(payLog);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         PayLog payLog = payLogService.findById(id);
         return ResultGenerator.genSuccessResult(payLog);
     }
@@ -49,6 +51,6 @@ public class PayLogController {
         PageHelper.startPage(page, size);
         List<PayLog> list = payLogService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

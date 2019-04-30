@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2019-04-30 14:20:00
+Date: 2019-04-30 15:25:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -572,7 +572,7 @@ CREATE TABLE `supplier` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_message`;
 CREATE TABLE `sys_message` (
-  `ID_` varchar(38) DEFAULT NULL,
+  `ID_` varchar(38) NOT NULL,
   `SEND_ID` varchar(38) DEFAULT NULL COMMENT '发送者编号',
   `REC_ID` varchar(38) DEFAULT NULL COMMENT '接受者编号',
   `MSG_TITLE` varchar(255) DEFAULT NULL COMMENT '消息标题',
@@ -584,6 +584,7 @@ CREATE TABLE `sys_message` (
   `MSG_TYPE` varchar(38) DEFAULT NULL COMMENT '消息类型',
   `OBJ_ID` varchar(38) DEFAULT NULL COMMENT '消息对应对象ID',
   `IS_PUSH` int(11) DEFAULT NULL COMMENT '是否推送',
+  PRIMARY KEY (`ID_`),
   KEY `FK_Reference_29` (`SEND_ID`),
   CONSTRAINT `FK_Reference_29` FOREIGN KEY (`SEND_ID`) REFERENCES `sec_user` (`ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

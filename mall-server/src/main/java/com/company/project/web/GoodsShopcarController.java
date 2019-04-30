@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class GoodsShopcarController {
     private GoodsShopcarService goodsShopcarService;
 
     @PostMapping
-    public Result add(@RequestBody GoodsShopcar goodsShopcar) {
+    public Result add(GoodsShopcar goodsShopcar) {
+        goodsShopcar.setId(UUID.randomUUID().toString());
         goodsShopcarService.save(goodsShopcar);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         goodsShopcarService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody GoodsShopcar goodsShopcar) {
+    public Result update(GoodsShopcar goodsShopcar) {
         goodsShopcarService.update(goodsShopcar);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         GoodsShopcar goodsShopcar = goodsShopcarService.findById(id);
         return ResultGenerator.genSuccessResult(goodsShopcar);
     }
@@ -49,6 +51,6 @@ public class GoodsShopcarController {
         PageHelper.startPage(page, size);
         List<GoodsShopcar> list = goodsShopcarService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

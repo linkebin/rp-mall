@@ -4,11 +4,10 @@ layui.use(['form','layer','table','laytpl'],function(){
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-    layer.msg(basePath)
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : '../../json/userList.json',
+        url : basePath+'/sec/user',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -18,27 +17,23 @@ layui.use(['form','layer','table','laytpl'],function(){
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: 'userName', title: '用户名', minWidth:100, align:"center"},
-            {field: 'userEmail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
-                return '<a class="layui-blue" href="mailto:'+d.userEmail+'">'+d.userEmail+'</a>';
+            {field: 'email', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
+                return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
             }},
-            {field: 'userSex', title: '用户性别', align:'center'},
-            {field: 'userStatus', title: '用户状态',  align:'center',templet:function(d){
-                return d.userStatus == "0" ? "正常使用" : "限制使用";
-            }},
-            {field: 'userGrade', title: '用户等级', align:'center',templet:function(d){
-                if(d.userGrade == "0"){
-                    return "注册会员";
-                }else if(d.userGrade == "1"){
-                    return "中级会员";
-                }else if(d.userGrade == "2"){
-                    return "高级会员";
-                }else if(d.userGrade == "3"){
-                    return "钻石会员";
-                }else if(d.userGrade == "4"){
-                    return "超级会员";
+            {field: 'sex', title: '用户性别', align:'center',templet:function(d){
+                if(d.sex == "0"){
+                    return "女";
+                }else if(d.sex == "1"){
+                    return "男";
+                }else if(d.sex == "2"){
+                    return "保密";
                 }
             }},
-            {field: 'userEndTime', title: '最后登录时间', align:'center',minWidth:150},
+            {field: 'status', title: '用户状态',  align:'center',templet:function(d){
+                return d.userStatus == "0" ? "正常使用" : "限制使用";
+            }},
+            {field: 'mobile', title: '手机号码', align:'center'},
+            {field: 'userEndTime', title: '部门', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -46,7 +41,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
+            table.reload("userList",{
                 page: {
                     curr: 1 //重新从第 1 页开始
                 },
@@ -69,7 +64,7 @@ layui.use(['form','layer','table','laytpl'],function(){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
                     body.find(".userName").val(edit.userName);  //登录名
-                    body.find(".userEmail").val(edit.userEmail);  //邮箱
+                    body.find(".userEmail").val(edit.email);  //邮箱
                     body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
                     body.find(".userGrade").val(edit.userGrade);  //会员等级
                     body.find(".userStatus").val(edit.userStatus);    //用户状态
@@ -145,12 +140,20 @@ layui.use(['form','layer','table','laytpl'],function(){
             });
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                    tableIns.reload();
-                    layer.close(index);
-                // })
+                $.ajax({
+                    url:   basePath+"/sec/user/"+data.id,
+                    type: 'DELETE',
+                    data: {},
+                    success :function(data){
+                        if(data.code==200){
+                            tableIns.reload();
+                            layer.close(index);
+                        }else {
+                            layer.msg(data.message);
+                        }
+
+                    }
+                });
             });
         }
     });

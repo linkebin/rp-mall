@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class SecMenuMemberController {
     private SecMenuMemberService secMenuMemberService;
 
     @PostMapping
-    public Result add(@RequestBody SecMenuMember secMenuMember) {
+    public Result add(SecMenuMember secMenuMember) {
+        secMenuMember.setId(UUID.randomUUID().toString());
         secMenuMemberService.save(secMenuMember);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         secMenuMemberService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody SecMenuMember secMenuMember) {
+    public Result update(SecMenuMember secMenuMember) {
         secMenuMemberService.update(secMenuMember);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         SecMenuMember secMenuMember = secMenuMemberService.findById(id);
         return ResultGenerator.genSuccessResult(secMenuMember);
     }
@@ -49,6 +51,6 @@ public class SecMenuMemberController {
         PageHelper.startPage(page, size);
         List<SecMenuMember> list = secMenuMemberService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

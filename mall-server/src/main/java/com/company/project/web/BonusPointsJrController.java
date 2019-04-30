@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class BonusPointsJrController {
     private BonusPointsJrService bonusPointsJrService;
 
     @PostMapping
-    public Result add(@RequestBody BonusPointsJr bonusPointsJr) {
+    public Result add(BonusPointsJr bonusPointsJr) {
+        bonusPointsJr.setId(UUID.randomUUID().toString());
         bonusPointsJrService.save(bonusPointsJr);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         bonusPointsJrService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody BonusPointsJr bonusPointsJr) {
+    public Result update(BonusPointsJr bonusPointsJr) {
         bonusPointsJrService.update(bonusPointsJr);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         BonusPointsJr bonusPointsJr = bonusPointsJrService.findById(id);
         return ResultGenerator.genSuccessResult(bonusPointsJr);
     }
@@ -49,6 +51,6 @@ public class BonusPointsJrController {
         PageHelper.startPage(page, size);
         List<BonusPointsJr> list = bonusPointsJrService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

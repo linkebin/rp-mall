@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class GoodsAttrNameController {
     private GoodsAttrNameService goodsAttrNameService;
 
     @PostMapping
-    public Result add(@RequestBody GoodsAttrName goodsAttrName) {
+    public Result add(GoodsAttrName goodsAttrName) {
+        goodsAttrName.setId(UUID.randomUUID().toString());
         goodsAttrNameService.save(goodsAttrName);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         goodsAttrNameService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody GoodsAttrName goodsAttrName) {
+    public Result update(GoodsAttrName goodsAttrName) {
         goodsAttrNameService.update(goodsAttrName);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         GoodsAttrName goodsAttrName = goodsAttrNameService.findById(id);
         return ResultGenerator.genSuccessResult(goodsAttrName);
     }
@@ -49,6 +51,6 @@ public class GoodsAttrNameController {
         PageHelper.startPage(page, size);
         List<GoodsAttrName> list = goodsAttrNameService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,27 @@ public class SecUserController {
     private SecUserService secUserService;
 
     @PostMapping
-    public Result add(@RequestBody SecUser secUser) {
+    public Result add(SecUser secUser) {
+        secUser.setId(UUID.randomUUID().toString());
+        secUser.setDeleted(0);
         secUserService.save(secUser);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         secUserService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody SecUser secUser) {
+    public Result update(SecUser secUser) {
         secUserService.update(secUser);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         SecUser secUser = secUserService.findById(id);
         return ResultGenerator.genSuccessResult(secUser);
     }
@@ -49,6 +52,6 @@ public class SecUserController {
         PageHelper.startPage(page, size);
         List<SecUser> list = secUserService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class GoodsAttrValueController {
     private GoodsAttrValueService goodsAttrValueService;
 
     @PostMapping
-    public Result add(@RequestBody GoodsAttrValue goodsAttrValue) {
+    public Result add(GoodsAttrValue goodsAttrValue) {
+        goodsAttrValue.setId(UUID.randomUUID().toString());
         goodsAttrValueService.save(goodsAttrValue);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         goodsAttrValueService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody GoodsAttrValue goodsAttrValue) {
+    public Result update(GoodsAttrValue goodsAttrValue) {
         goodsAttrValueService.update(goodsAttrValue);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         GoodsAttrValue goodsAttrValue = goodsAttrValueService.findById(id);
         return ResultGenerator.genSuccessResult(goodsAttrValue);
     }
@@ -49,6 +51,6 @@ public class GoodsAttrValueController {
         PageHelper.startPage(page, size);
         List<GoodsAttrValue> list = goodsAttrValueService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

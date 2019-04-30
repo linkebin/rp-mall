@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * Created by CodeGenerator on 2019/04/30.
@@ -21,25 +22,26 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @PostMapping
-    public Result add(@RequestBody Goods goods) {
+    public Result add(Goods goods) {
+        goods.setId(UUID.randomUUID().toString());
         goodsService.save(goods);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         goodsService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@RequestBody Goods goods) {
+    public Result update(Goods goods) {
         goodsService.update(goods);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
-    public Result detail(@PathVariable Integer id) {
+    public Result detail(@PathVariable String id) {
         Goods goods = goodsService.findById(id);
         return ResultGenerator.genSuccessResult(goods);
     }
@@ -49,6 +51,6 @@ public class GoodsController {
         PageHelper.startPage(page, size);
         List<Goods> list = goodsService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 }

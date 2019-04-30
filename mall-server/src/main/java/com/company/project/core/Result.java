@@ -9,6 +9,15 @@ public class Result<T> {
     private int code;
     private String message;
     private T data;
+    private  long total;
+    public long getTotal() {
+        return total;
+    }
+
+    public Result setTotal(long total) {
+        this.total = total;
+        return this;
+    }
 
     public Result setCode(ResultCode resultCode) {
         this.code = resultCode.code();
