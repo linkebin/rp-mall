@@ -30,7 +30,7 @@ layui.use(['form','layer','table','laytpl'],function(){
                 }
             }},
             {field: 'status', title: '用户状态',  align:'center',templet:function(d){
-                return d.userStatus == "0" ? "正常使用" : "限制使用";
+                return d.userStatus  == "0" ? "正常使用" : "限制使用";
             }},
             {field: 'mobile', title: '手机号码', align:'center'},
             {field: 'userEndTime', title: '部门', align:'center',minWidth:150},
