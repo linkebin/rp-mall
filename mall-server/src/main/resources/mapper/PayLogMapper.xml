@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.PayLogMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.PayLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="ORDER_NUM" jdbcType="VARCHAR" property="orderNum" />
+    <result column="PAY_ID" jdbcType="VARCHAR" property="payId" />
+    <result column="SUM" jdbcType="DECIMAL" property="sum" />
+    <result column="PAY_TYPE" jdbcType="VARCHAR" property="payType" />
+    <result column="RE_LOG" jdbcType="VARCHAR" property="reLog" />
+    <result column="PAY_TIME" jdbcType="TIMESTAMP" property="payTime" />
+  </resultMap>
+</mapper>

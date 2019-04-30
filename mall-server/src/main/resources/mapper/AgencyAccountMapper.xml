@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.AgencyAccountMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.AgencyAccount">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="AGENCY_CODE" jdbcType="VARCHAR" property="agencyCode" />
+    <result column="AGENCY_NAME" jdbcType="VARCHAR" property="agencyName" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="CON_NAME" jdbcType="VARCHAR" property="conName" />
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="AGENCY_PASS" jdbcType="VARCHAR" property="agencyPass" />
+    <result column="AGENCY_SOURCE" jdbcType="INTEGER" property="agencySource" />
+    <result column="AGENCY_TYPE" jdbcType="INTEGER" property="agencyType" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ADDR" jdbcType="VARCHAR" property="addr" />
+    <result column="HEAD_IMG" jdbcType="VARCHAR" property="headImg" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="SEX" jdbcType="INTEGER" property="sex" />
+    <result column="NATIVE_PLACE" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="C_TYPE" jdbcType="VARCHAR" property="cType" />
+    <result column="C_MUM" jdbcType="VARCHAR" property="cMum" />
+    <result column="C_IMG" jdbcType="VARCHAR" property="cImg" />
+    <result column="M_STATUS" jdbcType="INTEGER" property="mStatus" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="BANK_INFO" jdbcType="VARCHAR" property="bankInfo" />
+    <result column="BANK_NUM" jdbcType="VARCHAR" property="bankNum" />
+    <result column="BONUS_POINTS" jdbcType="DECIMAL" property="bonusPoints" />
+    <result column="ENCRYPT" jdbcType="VARCHAR" property="encrypt" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="DELETED" jdbcType="INTEGER" property="deleted" />
+    <result column="REMIND" jdbcType="INTEGER" property="remind" />
+  </resultMap>
+</mapper>

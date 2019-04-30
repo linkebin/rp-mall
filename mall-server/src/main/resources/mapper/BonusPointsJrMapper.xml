@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.BonusPointsJrMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.BonusPointsJr">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="RUN_NUM" jdbcType="VARCHAR" property="runNum" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="INCOME" jdbcType="VARCHAR" property="income" />
+    <result column="EXPEN" jdbcType="VARCHAR" property="expen" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="RELATION_ID" jdbcType="VARCHAR" property="relationId" />
+    <result column="CUST_ID" jdbcType="VARCHAR" property="custId" />
+    <result column="DELETED" jdbcType="VARCHAR" property="deleted" />
+  </resultMap>
+</mapper>

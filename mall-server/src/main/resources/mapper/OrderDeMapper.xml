@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.OrderDeMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.OrderDe">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="GOODS_CODE" jdbcType="VARCHAR" property="goodsCode" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="GOODS_MD" jdbcType="VARCHAR" property="goodsMd" />
+    <result column="GOODS" jdbcType="VARCHAR" property="goods" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="NUM" jdbcType="INTEGER" property="num" />
+    <result column="DS" jdbcType="DECIMAL" property="ds" />
+    <result column="SUM" jdbcType="DECIMAL" property="sum" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.SysMessageMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.SysMessage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="SEND_ID" jdbcType="VARCHAR" property="sendId" />
+    <result column="REC_ID" jdbcType="VARCHAR" property="recId" />
+    <result column="MSG_TITLE" jdbcType="VARCHAR" property="msgTitle" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="message" />
+    <result column="RED_STATUS" jdbcType="INTEGER" property="redStatus" />
+    <result column="P_DATE" jdbcType="TIMESTAMP" property="pDate" />
+    <result column="DELETED" jdbcType="VARCHAR" property="deleted" />
+    <result column="MSG_URL" jdbcType="VARCHAR" property="msgUrl" />
+    <result column="MSG_TYPE" jdbcType="VARCHAR" property="msgType" />
+    <result column="OBJ_ID" jdbcType="VARCHAR" property="objId" />
+    <result column="IS_PUSH" jdbcType="INTEGER" property="isPush" />
+  </resultMap>
+</mapper>

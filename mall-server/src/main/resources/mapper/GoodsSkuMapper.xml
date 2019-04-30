@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.GoodsSkuMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.GoodsSku">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="GOODS_ID" jdbcType="VARCHAR" property="goodsId" />
+    <result column="GOODS_ATTR" jdbcType="VARCHAR" property="goodsAttr" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="PU_PRICE" jdbcType="DECIMAL" property="puPrice" />
+    <result column="INTEGRAL" jdbcType="DECIMAL" property="integral" />
+    <result column="STOCK" jdbcType="INTEGER" property="stock" />
+    <result column="BROK" jdbcType="DECIMAL" property="brok" />
+    <result column="AMOUNT" jdbcType="INTEGER" property="amount" />
+  </resultMap>
+</mapper>

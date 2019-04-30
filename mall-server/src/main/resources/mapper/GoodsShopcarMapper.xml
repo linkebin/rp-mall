@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.GoodsShopcarMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.GoodsShopcar">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="CUST_ID" jdbcType="VARCHAR" property="custId" />
+    <result column="GOODS_ID" jdbcType="VARCHAR" property="goodsId" />
+    <result column="NUMBER" jdbcType="INTEGER" property="number" />
+    <result column="GOOD_ATTR" jdbcType="VARCHAR" property="goodAttr" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+  </resultMap>
+</mapper>
