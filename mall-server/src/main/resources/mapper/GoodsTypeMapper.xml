@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.project.dao.GoodsTypeMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.model.GoodsType">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="ID_" jdbcType="VARCHAR" property="id" />
-    <result column="CODE" jdbcType="VARCHAR" property="code" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.company.project.model.GoodsType">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ID_" jdbcType="VARCHAR" property="id"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="F_ID" jdbcType="VARCHAR" property="fId"/>
+    </resultMap>
+    <select id="findByFId" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM goods_type
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and F_ID=#{fId}
+            </if>
+        </where>
+    </select>
 </mapper>

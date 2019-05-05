@@ -1,0 +1,22 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 15,
+  "data": [
+    {
+      "GoodsTypeId": "1",
+      "GoodsTypeCode": "123456",
+      "GoodsTypeName": "生活用品"
+    },
+    {
+      "GoodsTypeId": "2",
+      "GoodsTypeCode": "123456",
+      "GoodsTypeName": "生活用品"
+    },
+    {
+      "GoodsTypeId": "3",
+      "GoodsTypeCode": "123456",
+      "GoodsTypeName": "生活用品"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,4 +20,8 @@ public class GoodsTypeServiceImpl extends AbstractService<GoodsType> implements 
     @Resource
     private GoodsTypeMapper goodsTypeMapper;
 
+    @Override
+    public List<GoodsType> findByFId(String fid) {
+        return goodsTypeMapper.findByFId(fid);
+    }
 }

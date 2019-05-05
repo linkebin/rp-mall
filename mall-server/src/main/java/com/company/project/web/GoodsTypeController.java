@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
-* Created by CodeGenerator on 2019/04/30.
-*/
+ * Created by CodeGenerator on 2019/04/30.
+ */
 @RestController
 @RequestMapping("/goods/type")
 public class GoodsTypeController {
@@ -44,6 +44,14 @@ public class GoodsTypeController {
     public Result detail(@PathVariable String id) {
         GoodsType goodsType = goodsTypeService.findById(id);
         return ResultGenerator.genSuccessResult(goodsType);
+    }
+
+    @GetMapping("/fId")
+    public Result getGoodsTypeByFId(@RequestParam(defaultValue = "0") String fId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        PageHelper.startPage(page, size);
+        List<GoodsType> goodsTypeList = goodsTypeService.findByFId(fId);
+        PageInfo pageInfo = new PageInfo(goodsTypeList);
+        return ResultGenerator.genSuccessTable(pageInfo);
     }
 
     @GetMapping
