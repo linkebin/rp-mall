@@ -6,21 +6,23 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         table = layui.table;
 
     //类别列表
-    var tableIns = table.render({
+    var tableIns  = table.render({
         elem: '#GoodsTypeList',
-        url: basePath + '/goods/type/fId',
+        url: basePath + '/goods/type',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
-        fId: $(".fId").val(),
         limit: 20,
         limits: [10, 15, 20, 25],
         id: "GoodsTypeTable",
+        where: {
+            key: "" //搜索的关键字
+        },
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-            {field: 'id', title: 'ID', width: 350, align: "center"},
-            {field: 'code', title: '类别编号', width: 100},
-            {field: 'name', title: '类别名称', align: 'center'},
+            {field: 'CODE', title: '类别编号', width: 100},
+            {field: 'NAME', title: '类别名称', align: 'center'},
+            {field: 'f_name', title: '父级类别名称', align: 'center'},
             {title: '操作', width: 200, templet: '#GoodsTypeListBar', fixed: "right", align: "center"}
         ]]
     });
@@ -28,7 +30,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click", function () {
         if ($(".searchVal").val() != '') {
-            table.reload("newsListTable", {
+            table.reload("GoodsTypeTable", {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 },

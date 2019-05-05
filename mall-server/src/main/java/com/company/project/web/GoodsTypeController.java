@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -55,9 +56,9 @@ public class GoodsTypeController {
     }
 
     @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result list(@RequestParam(defaultValue = "") String key,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<GoodsType> list = goodsTypeService.findAll();
+        List<Map> list = goodsTypeService.findByKey(key);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessTable(pageInfo);
     }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,5 +24,10 @@ public class GoodsTypeServiceImpl extends AbstractService<GoodsType> implements 
     @Override
     public List<GoodsType> findByFId(String fid) {
         return goodsTypeMapper.findByFId(fid);
+    }
+
+    @Override
+    public List<Map> findByKey(String key) {
+        return  goodsTypeMapper.findByKey(key);
     }
 }

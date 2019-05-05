@@ -1,7 +1,23 @@
 layui.use(['form', 'layer'], function () {
     var form = layui.form
-    layer = parent.layer === undefined ? layui.layer : top.layer,
+         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
+    //初始化父级选项
+    $.ajax({
+        type: "get",
+        url: basePath + '/goods/type',
+        async: true,
+        success: function(data) {
+            var list = data.data;
+            var str = '';
+            for (var i in list) {
+                var obj = list[i];
+                str = str + '<option value="' + obj.ID_+ '">' + obj.NAME + '</option>';
+            }
+            $('.fId').append(str);
+            form.render('select');
+        }
+    });
 
     form.on("submit(addGoodsType)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
@@ -11,7 +27,7 @@ layui.use(['form', 'layer'], function () {
             data: {
                 code: $(".code").val(),  //类别编号
                 name: $(".name").val(),  //类别名称
-                fId: data.fId == null ? 0 : data.fId,
+                fId: $(".fId").val()  //类别名称
             },
             success: function (data) {
                 if (data.code === 200) {
